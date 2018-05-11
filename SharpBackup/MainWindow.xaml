@@ -1,0 +1,104 @@
+﻿<Window x:Class="SharpBackup.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SharpBackup"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="330" Width="750" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" MaxHeight="500" MaxWidth="850" Background="Transparent">
+    <Border BorderThickness="3" BorderBrush="#606060" CornerRadius="3">
+        <Grid RenderTransformOrigin="0,0" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="31*"/>
+                <RowDefinition Height="144*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="122"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="125" Background="#404040" Grid.RowSpan="2">
+                <!-- First button in the sidebar-->
+                <Button Name="sideBarButton1" Style="{StaticResource ResourceKey=sidebarbutton}" Height="65" Click="sideBarButton1_Click" Foreground="FloralWhite" FontSize="18" BorderThickness="0">
+                    <Label Content="Status" FontWeight="Thin" Foreground="FloralWhite"/>
+                </Button>
+                <Separator Height="1" Margin="0" Background="DimGray" BorderThickness="0" BorderBrush="Gray" />
+
+                <!-- Second button in the sidebar-->
+                <Button Name="sideBarButton2" Style="{StaticResource ResourceKey=sidebarbutton}" Height="65" Click="sideBarButton2_Click" Foreground="FloralWhite" FontSize="18" BorderThickness="0">
+                    <Label Content="Add new" FontWeight="Thin" Foreground="FloralWhite"/>
+                </Button>
+                <Separator Height="1" Margin="0" Background="DimGray" BorderThickness="0" BorderBrush="Gray" />
+
+                <!-- Third button in the sidebar-->
+                <Button Name="sideBarButton3" Style="{StaticResource ResourceKey=sidebarbutton}" Height="65" Click="sideBarButton3_Click" Foreground="FloralWhite" FontSize="18" BorderThickness="0">
+                    <Label Content="Edit" FontWeight="Thin" Foreground="FloralWhite"/>
+                </Button>
+                <Separator Height="1" Margin="0" Background="DimGray" BorderThickness="0" BorderBrush="Gray" />
+
+                <!-- Fourth button in the sidebar-->
+                <Button Name="sideBarButton4" Style="{StaticResource ResourceKey=sidebarbutton}" Height="65" Click="sideBarButton4_Click" Foreground="FloralWhite" FontSize="18" BorderThickness="0">
+                    <Label Content="Remove" FontWeight="Thin" Foreground="FloralWhite"/>
+                </Button>
+                <Separator Height="2" Margin="0" Background="DimGray" BorderThickness="0" BorderBrush="Gray" />
+
+                <!-- Fifth button in the sidebar-->
+                <Button Name="sideBarButton5" Style="{StaticResource ResourceKey=sidebarbutton}" Height="65" Click="sideBarButton5_Click" Foreground="FloralWhite" FontSize="18" BorderThickness="0">
+                    <Label Content="About" FontWeight="Thin" Foreground="FloralWhite"/>
+                </Button>
+                <Separator Height="1" Margin="0" Background="DimGray" BorderThickness="0" BorderBrush="Gray" />
+
+            </StackPanel>
+            <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightGray" MouseLeftButtonDown="onLogoMouseDown">
+                <Label Content="SharpBackup" HorizontalAlignment="Center" VerticalAlignment="Center" Height="42" FontSize="25" FontWeight="ExtraLight"/>
+                <Button Name="closeButton" Style="{StaticResource exitButton}" Content="❌" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,0" BorderThickness="0" FontSize="20" Click="closeButton_Click"/>
+                <Button Name="minimizeButton" Style="{StaticResource minimizeButton}" Content="🗕" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,35,0" BorderThickness="0" FontSize="20" FontWeight="UltraBold" Click="minimizeButton_Click"/>
+            </Grid>
+            <Grid Name="StatusGrid" Grid.Column="1" Grid.Row="1" >
+                <Label Content="Status: " Margin="0,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Light"/>
+                <Label Name="statusSymbol" Content="✓" Margin="55,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="Orange" FontWeight="Light"/>
+                <TextBlock Name="statusText" Text="Starting backup manager" Margin="78,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="Black" FontWeight="Light" MaxWidth="308" MaxHeight="60" TextWrapping="WrapWithOverflow"/>
+                <!--
+            <ListView HorizontalAlignment="Stretch" Margin="10,47,10,10" VerticalAlignment="Stretch" MinWidth="375" Name="backupList" SelectionMode="Single">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="70"/>
+                <GridViewColumn Header="LastBackup" DisplayMemberBinding="{Binding LastBackup}" Width="64"/>
+                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="45"/>
+                <GridViewColumn Header="Progress %" DisplayMemberBinding="{Binding Progress}" Width="75"/>
+                <GridViewColumn Header="MB" DisplayMemberBinding="{Binding SizeProgress}" Width="45"/>
+                </GridView>
+                </ListView.View>
+                </ListView>
+                -->
+                <ListBox HorizontalAlignment="Stretch" Margin="10,47,10,10" MinWidth="375" Name="backupList" SelectionMode="Single">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <ProgressBar Style="{DynamicResource pbarCircularStyle}" Value="{Binding AllProgress}"></ProgressBar>
+                                <StackPanel Orientation="Vertical">
+                                    <Label Content="{Binding Name}" FontWeight="Bold" Margin="0"></Label>
+                                    <Label Content="{Binding Status}" Margin="0"></Label>
+                                    <Label Content="{Binding LastBackup}" Foreground="Gray" Margin="0"></Label>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button HorizontalAlignment="Center" Content="" Name="pauseButton">
+                                    </Button>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+        <Grid Name="BackupsGrid" Grid.Column="1" Grid.Row="1" >
+            <Label Content="Created by: Vaffanculo" FontSize="25" FontWeight="Thin" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Content="Version: 1.0 2018" FontSize="25" FontWeight="Thin" HorizontalAlignment="Left" Margin="10,0" VerticalAlignment="Bottom"/>
+        </Grid>
+
+
+    </Grid>
+    </Border>
+</Window>
+    
+    

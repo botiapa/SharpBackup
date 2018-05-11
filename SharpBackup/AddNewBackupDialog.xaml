@@ -1,0 +1,43 @@
+﻿<Window x:Class="SharpBackup.AddNewBackupDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SharpBackup"
+        mc:Ignorable="d"
+        Title="Add a new backup" Height="250" Width="300"
+        ShowInTaskbar="false"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        >
+    
+    <Grid Background="#10010010">
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="56*"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="41*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="TitleGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#303030" MouseDown="TitleGrid_MouseDown"/>
+
+        <Label Name="Title" Content="Add a new backup" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="ExtraLight" FontSize="20" Foreground="FloralWhite" Height="37" Margin="67,4" Width="166" MouseDown="TitleGrid_MouseDown"/>
+
+        <Label Content="Backup Name:" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" FontWeight="Light" Grid.Row="1" FontSize="20" Height="37" Width="131" />
+        <TextBox Name="nameTextBox" HorizontalAlignment="Stretch" Margin="10,30,10,0" TextWrapping="NoWrap" Text="e.g.: example name" VerticalAlignment="Top" Grid.Row="1" FontSize="16" FontWeight="Light" LostFocus="nameTextBox_LostFocus" GotFocus="nameTextBox_GotFocus" Height="25"/>
+
+        <Label Content="Backup Location:" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" FontWeight="Light" Grid.Row="2" FontSize="20" Height="37" Width="151"/>
+        <TextBox Name="locationTextBox" HorizontalAlignment="Stretch" Margin="10,30,35,0" TextWrapping="NoWrap" Text="e.g.: C:\examplefolder" VerticalAlignment="Top" Grid.Row="2" FontSize="16" FontWeight="Light" LostFocus="locationTextBox_LostFocus" GotFocus="locationTextBox_GotFocus" Height="25" Grid.RowSpan="2"/>
+        <Button Name="folderChooserButton" Content="📁" HorizontalAlignment="Right" Margin="10,30" FontSize="16" Grid.Row="2" Grid.RowSpan="2" VerticalAlignment="Top" Click="folderChooserButton_Click"/>
+        
+        <Label Content="Delay between backups:" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" FontWeight="Light" Grid.Row="3" FontSize="20" Height="37" Width="212" />
+        <TextBox Name="delayTextBox" HorizontalAlignment="Stretch" Margin="10,30,60,0" TextWrapping="NoWrap" Text="e.g.: 60" VerticalAlignment="Top" Grid.Row="3" FontSize="16" FontWeight="Light" LostFocus="delayTextBox_LostFocus" GotFocus="delayTextBox_GotFocus" Height="24"/>
+        <Label Content="Minutes" HorizontalAlignment="Right" Margin="0,27,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="15" FontWeight="Light" Height="27" Width="59"/>
+
+        <Button Name="okButton" Content="Ok" HorizontalAlignment="Left" Margin="30,7,0,8" VerticalAlignment="Center" Width="100" Grid.Row="4" Height="26" Click="okButton_Click"/>
+        <Button Name="cancelButton" Content="Cancel" HorizontalAlignment="Right" Margin="0,7,30,8" VerticalAlignment="Center" Width="100" Grid.Row="4" Height="26" Click="cancelButton_Click"/>
+        
+    </Grid>
+</Window>
